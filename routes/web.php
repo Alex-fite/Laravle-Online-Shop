@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,8 +42,19 @@ Route::get('/products/{id}/edit', '\App\Http\Controllers\Admin\AdminProductContr
 
 Route::put('/products/{id}/update', '\App\Http\Controllers\Admin\AdminProductController@update')->name("admin.product.update");
 
+
 });
 
+
+
 Auth::routes();
+
+
+
+Route::get('/cart', '\App\Http\Controllers\cartController@index')->name("cart.index");
+
+Route::get('/cart/delet', '\App\Http\Controllers\cartController@delete')->name("cart.delete");
+
+Route::post('/cart/delet{id}', '\App\Http\Controllers\cartController@add')->name("cart.add");
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

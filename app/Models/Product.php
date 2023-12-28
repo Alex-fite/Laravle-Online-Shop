@@ -18,5 +18,21 @@ class Product extends Model
             'image' => 'image',
         ]);
     }
+    public function getPrice()
+    {
+        return $this->price;
+    }
+    public function getId()
+    {
+        return $this->id;
+    }
+    public static function sumPriceByQuantities($products, $productsInSession)
+    {
+        $total = 0;
+        foreach ($products as $product) {
+            $total = $total + ($product->getPrice() * $productsInSession[$product->getId()]);
+        }
+        return $total;
+    }
 
 }

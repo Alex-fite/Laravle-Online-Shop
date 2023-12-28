@@ -22,21 +22,26 @@ Route::get('/products', '\App\Http\Controllers\ProductController@index')->name("
 Route::get('/products/{id}', '\App\Http\Controllers\ProductController@show')->name("product.show");
 
 
-Route::get('/admin', '\App\Http\Controllers\Admin\AdminHomeController@index')->name("admin.home.index");
+Route::middleware('admin')->prefix('/admin')->group(function() {
 
-Route::get('/admin/products', '\App\Http\Controllers\Admin\AdminProductController@index')->name("admin.product.index");
+//Route::get('/admin', '\App\Http\Controllers\Admin\AdminHomeController@index')->name("admin.home.index");
+Route::get('/', '\App\Http\Controllers\Admin\AdminHomeController@index')->name("admin.home.index");
 
-Route::post('/admin/products/store', '\App\Http\Controllers\Admin\AdminProductController@store')->name("admin.product.store");
+//Route::get('/admin/products', '\App\Http\Controllers\Admin\AdminProductController@index')->name("admin.product.index");
+Route::get('/products', '\App\Http\Controllers\Admin\AdminProductController@index')->name("admin.product.index");
 
-Route::get('/admin/products/create', '\App\Http\Controllers\Admin\AdminProductController@create')->name("admin.product.create");
+//Route::post('/admin/products/store', '\App\Http\Controllers\Admin\AdminProductController@store')->name("admin.product.store");
+Route::post('/products/store', '\App\Http\Controllers\Admin\AdminProductController@store')->name("admin.product.store");
 
-Route::delete('/admin/products/{id}/delete', '\App\Http\Controllers\Admin\AdminProductController@delete')->name("admin.product.delete");
+Route::get('/products/create', '\App\Http\Controllers\Admin\AdminProductController@create')->name("admin.product.create");
 
-Route::get('/admin/products/{id}/edit', '\App\Http\Controllers\Admin\AdminProductController@edit')->name("admin.product.edit");
+Route::delete('/products/{id}/delete', '\App\Http\Controllers\Admin\AdminProductController@delete')->name("admin.product.delete");
 
-Route::put('/admin/products/{id}/update', '\App\Http\Controllers\Admin\AdminProductController@update')->name("admin.product.update");
+Route::get('/products/{id}/edit', '\App\Http\Controllers\Admin\AdminProductController@edit')->name("admin.product.edit");
 
+Route::put('/products/{id}/update', '\App\Http\Controllers\Admin\AdminProductController@update')->name("admin.product.update");
 
+});
 
 Auth::routes();
 

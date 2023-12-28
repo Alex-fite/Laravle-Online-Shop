@@ -8,6 +8,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    @notifyCss
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous" />
 
@@ -49,6 +51,11 @@
                         <a class="nav-link active" href="{{ route('login') }}">Login</a>
                         <a class="nav-link active" href="{{ route('register') }}">Register</a> 
                     @else
+                         
+                        @if(Auth::user()->role == 'admin')
+                            <a href="nav-link active" href="{{ route('admin.home.index') }}">Dashboard</a>
+
+                        @endif
                         <form id="logout" action="{{ route('logout')}}" method="POST">
                             <a role="button" class="nav-link active"
                                 onclick="document.getElementById('logout').submit();">Logout</a>
@@ -109,6 +116,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
+
+    @notifyJs
+    @include('notify::components.notify')
 
 </body>
 

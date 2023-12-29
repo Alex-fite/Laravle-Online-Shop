@@ -58,3 +58,22 @@ Route::get('/cart/delet', '\App\Http\Controllers\cartController@delete')->name("
 Route::post('/cart/delet{id}', '\App\Http\Controllers\cartController@add')->name("cart.add");
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::middleware('auth')->group(function()
+{
+    Route::get('/cart/purchase', '\App\Http\Controllers\CartController@purchase')->name("cart.purchase");
+    Route::get('/my-account/orders','\App\Http\Controllers\CartController@purchase')->name("myaccount.orders");
+});
+
+Route::get('/{locale?}', function ($locale=null)
+{
+    if(isset($locale) && in_array($locale, config('app.available_locales')))
+    {
+        app()->setLocale($locale);
+    }
+    $viewData = [];
+    $viewData['title'] = "Home Page - online store";
+    return view('home.index')->with("viewData", $viewData);
+});
+Route::get('language/{locale}', '\App\Http\Controllers\LocalizationController@changeLocale')->name("locale");

@@ -12,7 +12,7 @@ class HomeController extends Controller
 
         $viewData = [];
 
-        $viewData["title"] = "Home Page - Online Store";
+        $viewData["title"] = __('Home Page - Online Store');
 
         return view('home.index')->with("viewData", $viewData);
     }
